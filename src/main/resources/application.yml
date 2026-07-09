@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: spring-jpa-hibernate
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jpa_hibernate_db
+    username: jpauser
+    password: jpapass
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      # Tamaño del pool de conexiones
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 600000
+
+  jpa:
+    # Hibernate nunca crea ni elimina tablas: Flyway es el único responsable
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        # Dialecto para PostgreSQL con Hibernate 7
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        # Mostrar las SQL generadas en los logs (solo para aprendizaje)
+        show_sql: true
+        format_sql: true
+        # Estadísticas de Hibernate: cuántas queries se ejecutaron
+        generate_statistics: true
+        # Batch size para reducir el problema N+1 en colecciones
+        default_batch_fetch_size: 20
+        jdbc:
+          batch_size: 25
+          order_inserts: true
+          order_updates: true
+    open-in-view: false
+    # open-in-view: false es la configuración correcta en producción.
+    # true (default) mantiene la sesión de Hibernate abierta durante
+    # todo el request HTTP, lo que puede causar lazy loading silencioso
+    # fuera de los límites del servicio → difícil de debuggear.
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    com.zaxxer.hikari: INFO

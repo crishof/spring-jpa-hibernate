@@ -1,0 +1,20 @@
+# Configuración de tests: H2 en memoria, sin Flyway, schema auto-create
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show_sql: true
+        format_sql: true
+
+  flyway:
+    # Flyway desactivado en tests: Hibernate crea el schema con ddl-auto
+    enabled: false
