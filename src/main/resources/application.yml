@@ -3,7 +3,7 @@ spring:
     name: spring-jpa-hibernate
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/jpa_hibernate_db
+    url: jdbc:postgresql://localhost:5435/jpa_hib_db
     username: jpauser
     password: jpapass
     driver-class-name: org.postgresql.Driver
@@ -45,7 +45,7 @@ spring:
     baseline-on-migrate: true
 
 server:
-  port: 8080
+  port: 8085
 
 logging:
   level:

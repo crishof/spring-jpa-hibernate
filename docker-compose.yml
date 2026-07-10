@@ -5,15 +5,15 @@ services:
     image: postgres:16-alpine
     container_name: jpa-hibernate-db
     environment:
-      POSTGRES_DB: jpa_hibernate_db
+      POSTGRES_DB: jpa_hib_db
       POSTGRES_USER: jpauser
       POSTGRES_PASSWORD: jpapass
     ports:
-      - "5432:5432"
+      - "5435:5432"
     volumes:
       - jpa_pg_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U jpauser -d jpa_hibernate_db"]
+      test: ["CMD-SHELL", "pg_isready -U jpauser -d jpa_hib_db"]
       interval: 10s
       timeout: 5s
       retries: 5

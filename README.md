@@ -153,11 +153,11 @@ docker compose ps            # esperar a que aparezca "healthy"
 ./mvnw spring-boot:run
 
 # 3. Probar endpoints
-curl -s http://localhost:8080/api/v1/posts | python3 -m json.tool
-curl -s http://localhost:8080/api/demo/n-plus-one/problem | python3 -m json.tool
-curl -s http://localhost:8080/api/demo/n-plus-one/join-fetch | python3 -m json.tool
-curl -s "http://localhost:8080/api/demo/criteria/search?status=PUBLISHED" | python3 -m json.tool
-curl -s http://localhost:8080/api/demo/criteria/stats | python3 -m json.tool
+curl -s http://localhost:8085/api/v1/posts | python3 -m json.tool
+curl -s http://localhost:8085/api/demo/n-plus-one/problem | python3 -m json.tool
+curl -s http://localhost:8085/api/demo/n-plus-one/join-fetch | python3 -m json.tool
+curl -s "http://localhost:8085/api/demo/criteria/search?status=PUBLISHED" | python3 -m json.tool
+curl -s http://localhost:8085/api/demo/criteria/stats | python3 -m json.tool
 
 # 4. Detener PostgreSQL
 docker compose down          # añade -v para borrar también el volumen
